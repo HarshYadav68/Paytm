@@ -21,9 +21,9 @@ async function main(){
     await mongoose.connect(process.env.DB_URL);
 }
 
-app.use(cors(
-    origin = "http://localhost:5173/"
-));
+app.use(cors({
+    origin : "http://localhost:5173/"
+}));
 app.use(express.urlencoded({extended : true}));
 app.use(express.json());
 
@@ -33,10 +33,14 @@ app.use(express.json());
 app.use("/api/v1/user" , userRouter);
 app.use("/api/v1/account", accountRouter);
 
+
+// 404 handler
 app.use((req,res,next)=>{
     next(new ExpressError(404 , "Not found"));
 });
 
+
+// Universal error handler
 app.use((err,req,res,next)=>{
     let {status=500 , message = "something went wrong"} = err;
     res.status(status).json({msg : message});

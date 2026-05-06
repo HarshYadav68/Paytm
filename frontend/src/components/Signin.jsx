@@ -14,7 +14,7 @@ function Signin(){
                     <div className="bg-white w-80 h-max mx-auto mt-10 rounded-lg shadow-lg  ">
 
                         <div className="p-6">
-                            <Heading heading="Sign in"/>
+                            <Heading heading="login"/>
                             <SubHeading subheading="Enter your credentials to access your account"/>
 
                             <InputBox label="Email"     placeholder="xyz@gamil.com" id="email"      type="email"     />
