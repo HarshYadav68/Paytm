@@ -6,12 +6,15 @@ const Signin = lazy(()=>(import("./components/Signin")));
 const Dashboard = lazy(()=>(import("./components/Dashboard")));
 const Send = lazy(()=>(import("./components/Send")));
 import ProtectedRoute from "./components/ProtectedComponent";
+import { Toaster } from "react-hot-toast";
 
 
 
 function App() {
 
   return (
+    <>
+    <Toaster position="top-right" />
     <Routes>  
       <Route  path="/" element={ <Navigate to="/signin" /> } />
       <Route path="/signup"     element={ <Suspense fallback={<div> loading.... </div>}>  <Signup/>      </Suspense>  }       />   
@@ -39,7 +42,7 @@ function App() {
               </Suspense>  }      
       />
     </Routes>
-
+    </>
   )
 }
 

@@ -1,13 +1,17 @@
 import { Navigate } from "react-router-dom";
+import { useState ,useEffect } from "react";
+import { getMe } from "../api/paytm";
 
 function ProtectedRoute({ children }) {
-   
-    const token = localStorage.getItem("token");
+    const [status, setStatus] = useState("loading"); 
 
-    if (!token) {
-       return <Navigate to="/signin" />       
-    }
-
+    useEffect(() => {
+        getMe()
+            .then()
+            .catch(() => setStatus("fail"));
+    }, []);
+    
+    if (status === "fail") return <Navigate to="/signin" />;
     return children;
 }
 

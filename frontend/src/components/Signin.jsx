@@ -6,6 +6,7 @@ import BottomWarning from "./common/BottomWarning";
 import { useState } from "react";
 import { signin } from "../api/paytm";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 
 function Signin(){
@@ -31,6 +32,7 @@ function Signin(){
                             <Button label="Sign in" onClick={ async() => {
                                 const res = await signin({ email, password });
                                 localStorage.setItem("token" , res.data.token);
+                                toast.success("loggedIn Successfully");
                                 navigate("/dashboard");
                             }} />
                             <BottomWarning label="Don't have an account ?  " linkText="Signup" to="/signup" />
