@@ -9,6 +9,7 @@ const {accountRouter} = require("./routes/account.js");
 const { ExpressError } = require("./Utilities/expressError.js");
 
 
+
 main()
 .then(()=>{
     console.log("connected with Mongod Atlas");
@@ -22,7 +23,7 @@ async function main(){
 }
 
 app.use(cors({
-    origin : "http://localhost:5173/"
+    origin : "http://localhost:5173"
 }));
 app.use(express.urlencoded({extended : true}));
 app.use(express.json());
@@ -32,6 +33,7 @@ app.use(express.json());
 // app.use("/api/v1" , mainRouter);
 app.use("/api/v1/user" , userRouter);
 app.use("/api/v1/account", accountRouter);
+
 
 
 // 404 handler

@@ -3,9 +3,17 @@ import InputBox from "./common/InputBox";
 import Heading from "./common/Heading";
 import SubHeading from "./common/SubHeading";
 import BottomWarning from "./common/BottomWarning";
+import { useState } from "react";
+import { signin } from "../api/paytm";
+import { useNavigate } from "react-router-dom";
 
 
 function Signin(){
+
+    let [email, setEmail] = useState("");
+    let [password, setPassword] = useState("");
+    const navigate = useNavigate();
+
     return (
         <>  
             <div className="bg-blue-100 w-full h-screen">  
@@ -17,10 +25,14 @@ function Signin(){
                             <Heading heading="login"/>
                             <SubHeading subheading="Enter your credentials to access your account"/>
 
-                            <InputBox label="Email"     placeholder="xyz@gamil.com" id="email"      type="email"     />
-                            <InputBox label="Password"  placeholder="John"          id="password"   type="password"/>
+                            <InputBox label="Email"     placeholder="xyz@gamil.com" id="email"      type="email"    onChange={(e)=>(setEmail(e.target.value))} />
+                            <InputBox label="Password"  placeholder="John"          id="password"   type="password" onChange={(e)=>(setPassword(e.target.value))}/>
 
-                            <Button label="Sign in"/>
+                            <Button label="Sign in" onClick={ async() => {
+                                const res = await signin({ email, password });
+                                localStorage.setItem("token" , res.data.token);
+                                navigate("/dashboard");
+                            }} />
                             <BottomWarning label="Don't have an account ?  " linkText="Signup" to="/signup" />
                         </div>   
                    </div>

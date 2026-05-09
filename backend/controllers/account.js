@@ -43,7 +43,7 @@ const transferAmount = async(req,res)=>{
 
         // Commit the transaction
         await session.commitTransaction();
-        res.json({msg: "Transfer successful"});
+        res.status(200).json({msg: "Transfer successful"});
 
     }
     catch(e){

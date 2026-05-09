@@ -1,11 +1,11 @@
-
 import Button from "./common/Button";
 import InputBox from "./common/InputBox";
 import Heading from "./common/Heading";
 import SubHeading from "./common/SubHeading";
 import BottomWarning from "./common/BottomWarning";
 import {signup} from "../api/paytm.js";
-import {useState} from "react"
+import {useState} from "react";
+import { useNavigate } from "react-router-dom";
 
 
 function Signup(){
@@ -13,6 +13,8 @@ function Signup(){
     let [lastName,setLastName] = useState("");
     let [email,setEmail] = useState("");
     let [password,setPassword] = useState("");
+
+    const navigate = useNavigate();
 
     return (
         <div className="bg-blue-100 w-full h-screen">  
@@ -30,7 +32,9 @@ function Signup(){
                         <InputBox label="Password"    placeholder="John"          id="password"   type="text"   value={password}  onChange={(e)=>(setPassword(e.target.value))}    />
 
                         <Button label="Sign up" onClick={ async () => { 
-                            await signup( {firstName, lastName, email, password}) ;
+                            const res = await signup({firstName, lastName, email, password}) ;
+                            localStorage.setItem("token", res.data.token);
+                            navigate("/dashboard");
                         }} />
 
                         <BottomWarning label="Already have an account ?  " linkText="Login" to="/signin" />

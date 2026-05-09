@@ -7,7 +7,7 @@ const isLoggedIn = (req,res,next)=>{
     try{
         const decoded = jwt.verify(token , process.env.JWT_SECRET);
         if(decoded){
-            console.log("decoded from isloggedin  :  ",decoded)
+            // console.log("decoded from isloggedin  :  ",decoded)
             req.userId = decoded._id;
             next();
             return;

@@ -17,7 +17,7 @@ const signup =  async(req,res)=>{
     const userId = user1._id;
     const balance = Math.ceil(Math.random() * 50000000);
     const account1 = new Account({userId , balance });
-    account1.save();
+    await account1.save();
 
     const token = jwt.sign({userId} , process.env.JWT_SECRET);
     return res.status(200).json({token , msg : "user created successfully"}); 
@@ -31,7 +31,7 @@ const signin = async(req,res)=>{
     if(existingUser){
         let {_id} = existingUser;
         const token = jwt.sign({_id} , process.env.JWT_SECRET);
-        return res.status(200).json({token});
+        return res.status(200).json({token,msg : "login successfully"});
     }
 
     return res.status(411).json({msg : "Please register yourself first"});
@@ -53,6 +53,7 @@ const bulkInfo = async(req,res)=>{
     const filter = req.query.filter || "";
 
     const users =  await User.find({ 
+        _id : { $ne: req.userId },
         $or : [
             {firstName : {$regex : filter} },
             {lastName :  {$regex : filter} } 
@@ -68,5 +69,22 @@ const bulkInfo = async(req,res)=>{
     });
 }
 
-module.exports = {signin,signup,updateInfo,bulkInfo};
+
+const getMe = async (req,res)=>{
+    const user = await User.findById(req.userId).select("-password");
+    const account = await Account.findOne({userId : req.userId});
+    
+    return res.json({
+        userInfo : {
+        email : user.email,
+        firstName : user.firstName,
+        lastName : user.lastName,
+        id : user._id,
+        balance : account.balance
+        }
+    });
+
+}
+
+module.exports = {signin,signup,updateInfo,bulkInfo , getMe};
 
