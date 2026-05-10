@@ -62,10 +62,10 @@ const bulkInfo = async(req,res)=>{
 
     return res.json({
         users : users.map((user)=>({
-                email : user.email,
-                firstName : user.firstName,
-                lastName : user.lastName,
-                id : user._id  }))
+            email : user.email,
+            firstName : user.firstName,
+            lastName : user.lastName,
+            id : user._id  }))
     });
 }
 
@@ -83,7 +83,6 @@ const getMe = async (req,res)=>{
         balance : account.balance
         }
     });
-
 }
 
 module.exports = {signin,signup,updateInfo,bulkInfo , getMe};

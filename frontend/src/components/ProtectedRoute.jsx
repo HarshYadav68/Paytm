@@ -7,10 +7,11 @@ function ProtectedRoute({ children }) {
 
     useEffect(() => {
         getMe()
-            .then()
+            .then(()=> setStatus("ok"))
             .catch(() => setStatus("fail"));
     }, []);
     
+    if(status === "loading") return <div> loading.... </div>
     if (status === "fail") return <Navigate to="/signin" />;
     return children;
 }

@@ -16,7 +16,7 @@ function Send(){
                 <div className="font-bold text-3xl text-center" > Send Money </div>
 
                 <div className="flex mt-7"> 
-                    <div className="w-7 h-7 rounded-full bg-green-500 flex justify-center text-white items-center"> { name[0].toUpperCase() } </div>
+                    <div className="w-7 h-7 rounded-full bg-green-500 text-white flex justify-center  items-center"> { name[0].toUpperCase() } </div>
                     <div className="ms-3 font-semibold text-xl"> { name } </div>
                 </div>
 

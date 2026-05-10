@@ -5,7 +5,7 @@ const Signup  = lazy(()=> import("./components/Signup" ));
 const Signin = lazy(()=>(import("./components/Signin")));
 const Dashboard = lazy(()=>(import("./components/Dashboard")));
 const Send = lazy(()=>(import("./components/Send")));
-import ProtectedRoute from "./components/ProtectedComponent";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 
 

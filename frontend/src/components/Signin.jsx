@@ -29,11 +29,15 @@ function Signin(){
                             <InputBox label="Email"     placeholder="xyz@gamil.com" id="email"      type="email"    onChange={(e)=>(setEmail(e.target.value))} />
                             <InputBox label="Password"  placeholder="John"          id="password"   type="password" onChange={(e)=>(setPassword(e.target.value))}/>
 
-                            <Button label="Sign in" onClick={ async() => {
-                                const res = await signin({ email, password });
-                                localStorage.setItem("token" , res.data.token);
-                                toast.success("loggedIn Successfully");
-                                navigate("/dashboard");
+                            <Button label="login" onClick={ async() => {
+                                try {
+                                    const res = await signin({ email, password });
+                                    localStorage.setItem("token", res.data.token);
+                                    toast.success("Login successful! 🎉");
+                                    navigate("/dashboard");
+                                 } catch (err) {
+                                    toast.error(err.response.data.msg || "Invalid credentials!");   // backend ka msg aayega "Please register yourself first"
+                                 }
                             }} />
                             <BottomWarning label="Don't have an account ?  " linkText="Signup" to="/signup" />
                         </div>   
